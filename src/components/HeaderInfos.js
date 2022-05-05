@@ -22,7 +22,7 @@ export default function HeaderInfos() {
         </li>
         <li>
           Crypto-monnaies :{" "}
-          {headerData?.active_cryptocurrencies?.toLocaleString()}
+          {headerData.active_cryptocurrencies?.toLocaleString()}
         </li>
         <li>Marchés : {headerData?.markets}</li>
       </ul>
@@ -30,7 +30,7 @@ export default function HeaderInfos() {
         <li className="global-mkt">
           Global Market Cap :
           <PercentChange
-            percent={headerData?.market_cap_change_percentage_24h_usd}
+            percent={headerData.market_cap_change_percentage_24h_usd}
           />
         </li>
         <li>

@@ -48,7 +48,7 @@ export default function GlobalChart({ coinsData }) {
               coinsData[i].symbol.toUpperCase() +
               " " +
               coinsData[i].market_cap_change_percentage_24h.toFixed(1) +
-              "%",
+              " %",
             size: coinsData[i].market_cap,
             fill: colorPicker(coinsData[i].price_change_percentage_24h),
           });
@@ -78,7 +78,7 @@ export default function GlobalChart({ coinsData }) {
         dataKey="size"
         stroke="rgb(51,51,51)"
         fill="black"
-        aspectRatio="1"
+        aspectRatio={1}
       >
         <Tooltip content={<TreemapTooltip />} />
       </Treemap>
