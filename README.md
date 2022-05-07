@@ -1,4 +1,8 @@
-# React Crypto App
+# Crypto Watch with React, Redux
+
+<img src="https://res.cloudinary.com/dbu3ntrbw/image/upload/v1651843683/portfolio/CryptoApp_oybs7x.png"/>
+
+### Try it here : https://crypto-watch-app.netlify.app/
 
 Market data : `https://api.coingecko.com/api/v3/global`
 
