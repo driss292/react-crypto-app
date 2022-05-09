@@ -3,14 +3,6 @@ import React, { useEffect, useState } from "react";
 export default function StarIcon({ coinId }) {
   //   console.log(coinId);
   const [like, setLike] = useState(false);
-  useEffect(() => {
-    if (window.localStorage.coinList) {
-      let favList = window.localStorage.coinList.split(",");
-      if (favList.includes(coinId)) {
-        setLike(true);
-      }
-    }
-  }, [coinId]);
 
   const idChecker = (id) => {
     let favList = null;
@@ -31,10 +23,20 @@ export default function StarIcon({ coinId }) {
       setLike(true);
     }
   };
+  useEffect(() => {
+    if (window.localStorage.coinList) {
+      let favList = window.localStorage.coinList.split(",");
+      if (favList.includes(coinId)) {
+        setLike(true);
+      }
+    } else {
+      setLike(false);
+    }
+  }, [coinId]);
   return (
     <img
       onClick={() => idChecker(coinId)}
-      src={like ? "./assets/star-full.svg" : "./assets/star-empty.svg"}
+      src={!like ? "./assets/star-empty.svg" : "./assets/star-full.svg"}
       alt="icon-star"
     />
   );

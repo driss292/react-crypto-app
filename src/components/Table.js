@@ -94,14 +94,18 @@ export default function Table({ coinsData }) {
         ?.slice(0, rangeNumber)
         .filter((coin) => {
           if (showlist) {
-            let list = window.localStorage.coinList.split(",");
-            if (list.includes(coin.id)) {
+            let list = window.localStorage.coinList?.split(",");
+            if (list?.includes(coin.id)) {
               return coin;
             }
           } else {
             return coin;
           }
-          return;
+          return null;
+          // if (showlist) {
+          //   return window.localStorage.coinList?.split(",").includes(coin.id);
+          // }
+          // return null;
         })
         .filter((coin) => {
           if (showStable) {
