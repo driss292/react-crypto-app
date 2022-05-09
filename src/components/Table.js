@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import TableLine from "./TableLine";
 import ToTop from "./ToTop";
 
@@ -7,6 +8,8 @@ export default function Table({ coinsData }) {
 
   const [rangeNumber, setRangeNumber] = useState(100);
   const [orderBy, setOrderBy] = useState("");
+  const showStable = useSelector((state) => state.stableReducer);
+  const showlist = useSelector((state) => state.listReducer);
   const tableHeader = [
     "Prix",
     "MarketCap",
@@ -19,6 +22,35 @@ export default function Table({ coinsData }) {
     "1a",
     "ATH",
   ];
+
+  const excludeCoin = (coin) => {
+    if (
+      coin === "usdt" ||
+      coin === "usdc" ||
+      coin === "busd" ||
+      coin === "dai" ||
+      coin === "ust" ||
+      coin === "mim" ||
+      coin === "tusd" ||
+      coin === "usdp" ||
+      coin === "usdn" ||
+      coin === "fei" ||
+      coin === "tribe" ||
+      coin === "gusd" ||
+      coin === "frax" ||
+      coin === "lusd" ||
+      coin === "husd" ||
+      coin === "ousd" ||
+      coin === "xsgd" ||
+      coin === "usdx" ||
+      coin === "eurs"
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   return (
     <div className="table-container">
       <ul className="table-header">
@@ -60,6 +92,28 @@ export default function Table({ coinsData }) {
       </ul>
       {coinsData
         ?.slice(0, rangeNumber)
+        .filter((coin) => {
+          if (showlist) {
+            let list = window.localStorage.coinList.split(",");
+            if (list.includes(coin.id)) {
+              return coin;
+            }
+          } else {
+            return coin;
+          }
+          return;
+        })
+        .filter((coin) => {
+          if (showStable) {
+            return coin;
+          } else {
+            if (excludeCoin(coin.symbol)) {
+              return coin;
+            } else {
+              return null;
+            }
+          }
+        })
         .sort((a, b) => {
           switch (orderBy) {
             case "Prix":
